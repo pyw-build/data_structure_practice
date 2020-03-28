@@ -1,5 +1,37 @@
 import random
 
+def my_mergesort(list_in):
+    if len(list_in)<=1:
+        return list_in
+    else: 
+        half_len =int(len(list_in)/2)
+        #print("list in: "+str(list_in))
+        #sort the first half
+        first_half = my_mergesort(list_in[0:half_len])
+        #sort the second half
+        second_half = my_mergesort(list_in[half_len:len(list_in)])
+        #merge two sorted lists
+        return merge(first_half, second_half)
+
+def merge(list_a,list_b):
+    merged_list = []
+    list_a_cursor=0
+    list_b_cursor=0
+    #print("list a: "+str(list_a))
+    #print("list b: "+str(list_b))
+    while( list_a_cursor!=len(list_a) and list_b_cursor!=len(list_b) ):
+        if list_a[list_a_cursor]<list_b[list_b_cursor]:
+            merged_list.append(list_a[list_a_cursor])
+            list_a_cursor+=1
+        else:
+            merged_list.append(list_b[list_b_cursor])
+            list_b_cursor+=1
+    if list_b_cursor!=len(list_b): #no item left in list_a, but something is left in list_b
+        merged_list+=list_b[list_b_cursor:len(list_b)]
+    elif list_a_cursor!=len(list_a): #no item left in list_b, but something is left in list_a
+        merged_list+=list_a[list_a_cursor:len(list_a)]
+    return merged_list
+
 def my_quicksort(list_in,lo,hi):
     if hi>lo:
         index_p = partition(list_in, lo, hi)
@@ -39,3 +71,9 @@ if __name__=='__main__':
     my_quicksort(list_A,0,len(list_A))
     print("sorted list  : "+str(list_A))
     print("test result  : "+test_sorted(list_A))
+
+    list_B=random.sample(range(1000),100)
+    print("original list: "+str(list_B))
+    sorted_list_B = my_mergesort(list_B)
+    print("sorted list  : "+str(sorted_list_B))
+    print("test result  : "+test_sorted(sorted_list_B))
