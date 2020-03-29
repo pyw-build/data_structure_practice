@@ -52,6 +52,7 @@ class myQueue:
         return len(self.queueList) == 0
 
 if __name__ == "__main__":
+    #Stack test
     myStacktest = myStack(5)
     #Push test
     for i in range(6):
@@ -63,6 +64,7 @@ if __name__ == "__main__":
         if popItem!=None:
             print("Pop: "+str(popItem.content))
 
+    #Queue test
     myQueuetest = myQueue(5)
     #Add test
     for i in range(6):
