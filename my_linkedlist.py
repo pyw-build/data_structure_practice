@@ -35,12 +35,23 @@ class myLinkedList:
             self.listlength+=1
 
     def delete(self, content_in):
+        #skip temporarily
         pass
+
     def traverse(self):
         positionToPrint = self.head
         while positionToPrint!=None:
             print(positionToPrint.content)
             positionToPrint = positionToPrint.next
+
+    def reverse(self):
+        h1=None
+        h2=self.head
+        while h2:
+            self.head=h2
+            h2=h2.next
+            self.head.next=h1
+            h1=self.head
 
 if __name__ == "__main__":
     myLinkedListTest = myLinkedList()
@@ -56,3 +67,6 @@ if __name__ == "__main__":
     myLinkedListTest.insert_at_middle("UU",100)
     myLinkedListTest.traverse()
     print(myLinkedListTest.listlength)
+
+    myLinkedListTest.reverse()
+    myLinkedListTest.traverse()
