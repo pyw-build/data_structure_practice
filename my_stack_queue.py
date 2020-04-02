@@ -11,6 +11,7 @@ class myStack:
             print("Stack full! Cannot push!")
         else:
             self.stackList.append(new_node)
+            #print("push:"+str(new_node))
     def pop(self):
         if len(self.stackList) == 0:
             print("Stack empty! Cannot pop!")
