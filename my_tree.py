@@ -150,7 +150,7 @@ if __name__ == "__main__":
     myBSTtest.delete(40)
     myBSTtest.inorder_traverse(myBSTtest.root)
 
-    #String test
+    #String Test
     myStrBSTtest = myBST(None)
     value_to_insert = [("Series|(",2),("Series!geometric|(",4),("Euler’s constant",4),("Series!geometric|)",4),\
         ("Series!arithmetic|(",4),("Series!arithmetic|)",5),("Series!harmonic|(",5),\
