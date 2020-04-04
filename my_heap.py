@@ -4,6 +4,9 @@ class myHeapNode:
     def __init__(self, key_input, data_input):
         self.key = key_input
         self.data = data_input
+    
+    def __repr__(self):
+        return "Node key: "+str(self.key)+", node data: "+str(self.data)
 
 class myMinHeap:
     def __init__(self):
@@ -20,15 +23,22 @@ class myMinHeap:
     def insert(self, new_node):
         self.heapList.append(new_node)
         child_idx = len(self.heapList)-1 #The newly inserted element
-        parent_idx = self.getParentIdx(child_idx)
         if child_idx==1: #root
             self.root = self.heapList[child_idx]
         else: #other node
-            while (parent_idx>=1) and (self.heapList[child_idx].key<self.heapList[parent_idx].key): #(parent_idx>=1) should be checked first
-                #print("child idx: "+str(child_idx)+", parent idx: "+str(parent_idx))
-                self.swapNodeContent(child_idx,parent_idx)
-                child_idx = parent_idx
-                parent_idx = self.getParentIdx(child_idx)
+            self.bubble_up(child_idx)
+
+    def bubble_up(self, child_idx):
+        parent_idx = self.getParentIdx(child_idx)
+        while (parent_idx>=1) and (self.heapList[child_idx].key<self.heapList[parent_idx].key): #(parent_idx>=1) should be checked first
+            #print("child idx: "+str(child_idx)+", parent idx: "+str(parent_idx))
+            self.swapNodeContent(child_idx,parent_idx)
+            child_idx = parent_idx
+            parent_idx = self.getParentIdx(child_idx)
+
+    def decreaseKey(self, child_idx, new_key):
+        self.heapList[child_idx].key = new_key
+        self.bubble_up(child_idx)
 
     #Delete the root, move the last element to the root, then bubble-down
     def extract(self):
