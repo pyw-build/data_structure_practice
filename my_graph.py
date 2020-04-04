@@ -36,7 +36,7 @@ class myGraph:
             found_list = []
             found_idx = self.binarySearchEdge(start_v,self.edges,0,len(self.edges)-1) #first found idx
             while found_idx:
-                print(len(self.edges))
+                #print(len(self.edges))
                 found_list.append(self.edges[found_idx])
                 del self.edges[found_idx]
                 found_idx = self.binarySearchEdge(start_v,self.edges,0,len(self.edges)-1)
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     for item in vertice_file.read().splitlines():
         myVertexTest = myVertex(item)
         myGraphTest.vertices.append(myVertexTest)
-        print(myVertexTest)
+        #print(myVertexTest)
 
     edge_file = open("Edges.txt", "r")
     for item in edge_file.read().splitlines():
@@ -58,12 +58,12 @@ if __name__ == "__main__":
         second_comma = first_comma+1+item[first_comma+1:].find(',')
         myEdgeTest = myEdge(item[1:first_comma],item[first_comma+2:second_comma],int(item[second_comma+2:-1]))
         myGraphTest.edges.append(myEdgeTest)
-        print(myEdgeTest)
+        #print(myEdgeTest)
 
     #get user input on the starting and end stations
     # start_v = input("Please enter the starting station: ")
     # end_v = input("Please enter the end station: ")
-    start_v = "Edgware"
+    start_v = "Greenwich"
     end_v = "Hendon_Central"
 
     #Dijkstra’s algorithm
@@ -77,18 +77,18 @@ if __name__ == "__main__":
         else:
             myHeapNodeTest = my_heap.myHeapNode(float("inf"),item)
             myVerticeHeap.insert(myHeapNodeTest)
-        print(myHeapNodeTest.data.data)
+        #print(myHeapNodeTest.data.data)
 
     visited_vertices = []
 
     while not myVerticeHeap.isEmpty():
         #extract vertex with min recorded distance from the heap, and added into visited list
         visited_vertices.append(myVerticeHeap.extract())  
-        print("Start from: "+(visited_vertices[-1].data.data))
+        #print("Start from: "+(visited_vertices[-1].data.data))
 
         #update all edges from starting point
         found_list = myGraphTest.searchEdge(visited_vertices[-1].data.data)
-        print(found_list)
+        #print(found_list)
 
         for item in found_list:
             found = False
@@ -98,13 +98,13 @@ if __name__ == "__main__":
                     found = True
                     break
             if found:
-                print("found idx: "+str(idx)+", data: "+(myVerticeHeap.heapList[idx].data.data))
-                print("heap len: "+str(len(myVerticeHeap.heapList)))
+                #print("found idx: "+str(idx)+", data: "+(myVerticeHeap.heapList[idx].data.data))
+                #print("heap len: "+str(len(myVerticeHeap.heapList)))
                 new_distance = visited_vertices[-1].key+item.weight
                 if new_distance<myVerticeHeap.heapList[idx].key:
                     myVerticeHeap.heapList[idx].data.prev_v = item.start
                     myVerticeHeap.decreaseKey(idx, new_distance)
-        print(myVerticeHeap)
+        #print(myVerticeHeap)
 
     #output results
     current_v = end_v
