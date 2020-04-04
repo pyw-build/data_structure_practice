@@ -1,4 +1,5 @@
 import random
+import my_heap
 
 def my_mergesort(list_in):
     if len(list_in)<=1:
@@ -65,6 +66,18 @@ def test_sorted(list_in):
             return "Sort Fail"
     return "Sort Pass"
 
+def my_heapsort(list_in):
+    myMinHeapTest = my_heap.myMinHeap()
+    for item in list_in:
+        myHeapNodeTest = my_heap.myHeapNode(item,"Test_"+str(item))
+        myMinHeapTest.insert(myHeapNodeTest)
+
+    sorted_list = []
+    while not myMinHeapTest.isEmpty():
+        extract_node = myMinHeapTest.extract()
+        sorted_list.append(extract_node.key)
+    return sorted_list
+
 if __name__=='__main__':
     list_A=random.sample(range(1000),100)
     print("original list: "+str(list_A))
@@ -77,3 +90,9 @@ if __name__=='__main__':
     sorted_list_B = my_mergesort(list_B)
     print("sorted list  : "+str(sorted_list_B))
     print("test result  : "+test_sorted(sorted_list_B))
+
+    list_C=random.sample(range(1000),100)
+    print("original list: "+str(list_C))
+    sorted_list_C = my_heapsort(list_C)
+    print("sorted list  : "+str(sorted_list_C))
+    print("test result  : "+test_sorted(sorted_list_C))
