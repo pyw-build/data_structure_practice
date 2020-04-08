@@ -15,12 +15,13 @@ class myEdge:
         self.weight=weight
 
     def __repr__(self):
-        return ("start: "+str(self.start)+", end:"+str(self.end)+", weight:"+str(self.weight))
+        return ("start: "+str(self.start)+", end: "+str(self.end)+", weight:"+str(self.weight))
 
 class myGraph:
     def __init__(self):
         self.vertices = []
         self.edges = []
+        self.adjacency_list = {} #use dict to store adjancency list
 
     def binarySearchEdge(self,key,list_in,start,end):
         if end>=start:
