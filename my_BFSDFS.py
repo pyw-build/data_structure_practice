@@ -8,6 +8,14 @@ def BFS(graph, queue, vertices_list, start_point, start_level):
             queue.add(item)
             print(f'item: {item}, start_point: {start_point}, level: {start_level+1}')
 
+def DFS(graph, vertices_list, start_point, start_level):
+    for item in graph.adjacency_list[start_point]:
+        if not vertices_list[item][0]:
+            vertices_list[item] = [start_point, start_level+1]
+            print(f'item: {item}, start_point: {start_point}, level: {start_level+1}')
+            DFS(graph, vertices_list, item, start_level+1)            
+    return
+
 if __name__ == "__main__":
 
     #vertices_names = ['A','B','C','D','E','F','G','H']
@@ -55,6 +63,7 @@ if __name__ == "__main__":
     print(my_graph_test.adjacency_list)
 
     #BFS
+    print("=== BFS ===")
     my_v_queue = my_stack_queue.myQueue(len(vertices_to_be_added))
     #start from 'A'
     my_v_queue.add('A')
@@ -65,3 +74,16 @@ if __name__ == "__main__":
         BFS(my_graph_test, my_v_queue, vertices_to_be_added, start_point, start_level)
         start_point = my_v_queue.delete()
         start_level = vertices_to_be_added[start_point][1]
+
+    #DFS
+    print("=== DFS ===")
+    #reset
+    for key in vertices_to_be_added:
+        vertices_to_be_added[key] = [None, 0]
+
+    vertices_to_be_added['A']=['visited',0]
+    start_point = 'A'
+    start_level = 0
+    DFS(my_graph_test, vertices_to_be_added, start_point, start_level)
+    
+    
